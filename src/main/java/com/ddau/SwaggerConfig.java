@@ -16,13 +16,16 @@ import springfox.documentation.builders.ParameterBuilder;
 import springfox.documentation.schema.AlternateTypeRule;
 import springfox.documentation.schema.ModelRef;
 import springfox.documentation.schema.WildcardType;
+import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.ApiKey;
 import springfox.documentation.service.AuthorizationScope;
+import springfox.documentation.service.Contact;
 import springfox.documentation.service.Parameter;
 import springfox.documentation.service.ResponseMessage;
 import springfox.documentation.service.SecurityReference;
 import springfox.documentation.service.SecurityScheme;
 import springfox.documentation.service.Tag;
+import springfox.documentation.service.VendorExtension;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spi.service.contexts.SecurityContext;
 import springfox.documentation.spring.web.plugins.Docket;
@@ -30,12 +33,12 @@ import springfox.documentation.swagger.web.ApiKeyVehicle;
 import springfox.documentation.swagger.web.SecurityConfiguration;
 import springfox.documentation.swagger.web.UiConfiguration;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
 
 /**
- * @author frere
- * swagger-ui.html
+ * @author frere swagger-ui.html
  */
 public class SwaggerConfig {
 	@Bean
@@ -59,14 +62,13 @@ public class SwaggerConfig {
 		SecurityContext context = securityContext();
 		List<SecurityContext> seccontexts = new ArrayList<SecurityContext>();
 		seccontexts.add(context);
-		Parameter param = new ParameterBuilder().name("version")
-				.description("公共入参 version , API 版本号").modelRef(new ModelRef("string"))
-				.parameterType("query").required(true).defaultValue("1.0").build();
+		Parameter param = new ParameterBuilder().name("version").description("公共入参 version , API 版本号")
+				.modelRef(new ModelRef("string")).parameterType("query").required(true).defaultValue("1.0").build();
 		List<Parameter> params = new ArrayList<Parameter>();
 		params.add(param);
 		docket.globalResponseMessage(RequestMethod.GET, lst).securitySchemes(lstss).securityContexts(seccontexts)
 				.enableUrlTemplating(false).globalOperationParameters(params)
-				.tags(new Tag("Service", "All apis relating to pets"));
+				.tags(new Tag("Service", "All apis relating to pets")).apiInfo(apiInfo());
 		// .additionalModels(typeResolver.resolve(AdditionalModel.class));
 
 		return docket;
@@ -109,5 +111,33 @@ public class SwaggerConfig {
 				UiConfiguration.Constants.DEFAULT_SUBMIT_METHODS, false, // enableJsonEditor => true | false
 				true, // showRequestHeaders => true | false
 				60000L); // requestTimeout => in milliseconds, defaults to null (uses jquery xh timeout)
+	}
+
+	@SuppressWarnings("rawtypes")
+	ApiInfo apiInfo() {
+		Contact contact = new Contact("Frere921", "https://xx.me", "921@xx.com");
+
+		Collection<VendorExtension> ext = new ArrayList<>();
+		VendorExtension ex = new VendorExtension<String>() {
+
+			@Override
+			public String getName() {
+				return "smile921";
+			}
+
+			@Override
+			public String getValue() {
+				return "9211";
+			}
+		};
+		ext.add(ex );
+		return new ApiInfo("API接口", // 大标题 title
+				" API接口描述", // 描述
+				"1.0", // 版本
+				"www.xx.com", // termsOfServiceUrl
+				contact, // 作者
+				"API", // 链接显示文字
+				"https://xx.me", // 网站链接
+				ext );
 	}
 }
