@@ -1,0 +1,5 @@
+* Gradle + Spring Boot + SpringFox
+** 微服务自带 swagger 文档
+
+** 开发过程中的一点小提示
++ build.gradle 的文件中添加新的依赖，在eclipse 中可能不会自动编译识别出来，需要手动执行一次 ide eclipse 任务才行
