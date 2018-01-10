@@ -130,7 +130,7 @@ public class SwaggerConfig {
 				return "9211";
 			}
 		};
-		ext.add(ex );
+		ext.add(ex);
 		return new ApiInfo("API接口", // 大标题 title
 				" API接口描述", // 描述
 				"1.0", // 版本
@@ -138,6 +138,6 @@ public class SwaggerConfig {
 				contact, // 作者
 				"API", // 链接显示文字
 				"https://xx.me", // 网站链接
-				ext );
+				ext);
 	}
 }
