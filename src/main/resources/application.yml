@@ -1,11 +1,10 @@
+## spring 
 spring:
   application:
     name: 
       ddau-skekiton
-logging:
-  level:
-    root:
-      DEBUG
+
+## custom database conf      
 application:
   database:
     type:
@@ -20,7 +19,32 @@ application:
       org.sqlite.JDBC
     dbName:
       ddau
+
+## server conf      
 server:
   port:
-    8080      
+    8080  
+    
+## logging conf    
+logging:
+#  exception-conversion-word:
+#    clr   
+  pattern:
+#    console:
+#      true     
+#    dateformat:
+#      -yyyy-MM-dd HH:mm:ss.SSS
+#    level:
+#      -%5p
+    file:
+      spring-log.log
+  file:
+    max-history:
+      2d
+    max-size:
+      10M  
+  level:
+    root:
+      DEBUG
+    
             
