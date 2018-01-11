@@ -42,7 +42,7 @@ logging:
     max-history:
       2d
     max-size:
-      10M  
+      10MB  
   level:
     root:
       DEBUG
